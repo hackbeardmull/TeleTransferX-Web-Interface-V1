@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+   <body>
+      <table border = 1>
+         <thead>
+            <td>ID</td>
+            <td>TITLE/td<
+            <td>ALBUM</td>
+            <td>ARTIST</td>
+         </thead>
+         
+         {% for row in rows %}
+            <tr>
+               <td>{{row["ID"]}}</td>
+               <td>{{row["TITLE"]}}</td>
+               <td> {{ row["ALBUM"]}}</td>
+               <td>{{row['ARTIST']}}</td>	
+            </tr>
+         {% endfor %}
+      </table>
+      
+      <a href = "/">Go back to home page</a>
+   </body>
+</html>

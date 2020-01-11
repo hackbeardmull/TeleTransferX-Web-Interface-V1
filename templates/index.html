@@ -1,0 +1,83 @@
+<html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<head>
+    <style>
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+                a:link, a:visited {
+  background-color: black;
+  color: white;
+
+}
+body {
+    background-color: black;
+}
+.center{
+    position:absolute;
+    width:1300px;
+    height:650px;
+    left:50%;
+    top:50%;
+    margin-left:-650px;
+    margin-top:-325px;
+}
+input[type="submit"] {
+  background-color: white;
+  color: black;
+  border: 2px solid #333;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+
+  border-radius: 15px 50px 30px;
+  padding: 20px;
+  width: 200px;
+  height: 80px;
+}
+    </style>
+</head>
+<body>
+    
+<nav>
+    <ul>
+        <li> <a href = "/"><img src="{{url_for('static', filename='start.png')}}" width="16" height="16"> Start</a></li>
+       <li><a href="/musikdb"><img src="{{url_for('static', filename='music.png')}}" width="16" height="16"> Show Music DB</a></li>
+        <li><a href="/moviestreamdb"><img src="{{url_for('static', filename='stream.png')}}" width="16" height="16"> Show Streaming DB</a></li>
+        <li><a href="/bookdb"><img src="{{url_for('static', filename='book.png')}}" width="16" height="16"> Show Book DB</a></li>
+        <li><a href="/filedb"><img src="{{url_for('static', filename='file.png')}}" width="16" height="16"> Show File DB</a></li>
+        <li><a href="/searchfile"><img src="{{url_for('static', filename='file.png')}}" width="16" height="16"> Search File DB</a></li>
+        <li><a href="/searchmusictitle"><img src="{{url_for('static', filename='music.png')}}" width="16" height="16"> Search Music DB</a></li>
+        <li><a href="/searchmoviestream"><img src="{{url_for('static', filename='stream.png')}}" width="16" height="16"> Search Streaming DB</a></li>
+        <li><a href="/searchbook"><img src="{{url_for('static', filename='book.png')}}" width="16" height="16"> Search Book DB</a></li>
+        <li><a href="/getpremium"><img src="{{url_for('static', filename='prem.png')}}" width="16" height="16"> Get Premium</a></li>
+        <li><a href="/logout"><img src="{{url_for('static', filename='logout.png')}}" width="16" height="16"> Logout</a></li>
+
+    </ul>
+</nav>
+    	<div class="container" style="min-height:100% width:80%">
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	    {% for message in messages %}
+		  <div class="alert alert-warning alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+			{{message}}
+		  </div>
+		{% endfor %}
+	  {% endif %}
+	{% endwith %}
+
+	{% block body %}{% endblock %}
+</div>
+    <center><img src="{{url_for('static', filename='logo.png')}}" width="550" height="480"></center>
+<div class="footer">
+  <p>TeleTransferX - (C) 2019 TeleX LLC <a href="/abuse"> DMCA ABUSE</a> <a href="/getpremium"><img src="{{url_for('static', filename='prem.png')}}" width="16" height="16"> Get Premium</a> </p>
+</div>
+</body>
+</html>

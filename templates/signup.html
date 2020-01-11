@@ -1,0 +1,115 @@
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+<link rel="stylesheet" href="/static/login.css" type="text/css">
+
+
+<center><img src="{{url_for('static', filename='logo.png')}}" width="150" height="150" /></center>
+<style>
+    .tutorial-wrapper{
+        width: 100%;
+    }
+    .tutorial-wrapper form{
+        background-color: #ffc;
+        border: 1px solid #cc9;
+        padding: 10px;
+        font-family: verdana;
+        width: 75%;
+        font-size: 1em;
+    }
+    .field-wrapper{
+        margin: 2px 0 2px 0;
+        padding: 0;
+    }
+    .tutorial-wrapper label{
+        float: left;
+        text-align: right;
+        margin: 0 5px 0 0;
+        width: 30%;
+    }
+    .tutorial-wrapper input{
+        width: 200px;
+        border: 1px solid #cc9;
+    }
+    .confirm-message{
+        margin: 0;
+        padding: 0;
+        font-size: .8em;
+    }
+</style>
+<script type="text/javascript">
+function checkPass()
+{
+    //Store the password field objects into variables ...
+    var password = document.getElementById('password');
+    var confirm  = document.getElementById('password');
+    //Store the Confirmation Message Object ...
+    var message = document.getElementById('confirm-message2');
+    //Set the colors we will be using ...
+    var good_color = "#66cc66";
+    var bad_color  = "#ff6666";
+    //Compare the values in the password field
+    //and the confirmation field
+    if(password.value == confirm.value){
+        //The passwords match.
+        //Set the color to the good color and inform
+        //the user that they have entered the correct password
+        confirm.style.backgroundColor = good_color;
+        message.style.color           = good_color;
+        message.innerHTML             = '<img src="/wp-content/uploads/2019/04/tick.png" alt="Passwords Match!">';
+    }else{
+        //The passwords do not match.
+        //Set the color to the bad color and
+        //notify the user.
+        confirm.style.backgroundColor = bad_color;
+        message.style.color           = bad_color;
+        message.innerHTML             = '<img src="/wp-content/uploads/2019/04/publish_x.png" alt="Passwords Do Not Match!">';
+    }
+}
+</script>
+<form action="/signupres" method="POST">
+<div class="login">
+<div class="login-screen">
+<div class="app-title">
+
+<h1>Sign Up</h1>
+</div>
+	<div class="container" style="min-height:100% width:80%">
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	    {% for message in messages %}
+		  <div class="alert alert-warning alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+			{{message}}
+		  </div>
+		{% endfor %}
+	  {% endif %}
+	{% endwith %}
+
+	{% block body %}{% endblock %}
+</div>
+<div class="login-form">
+<div class="control-group">
+	<input type="text" class="login-field" value="" placeholder="email" name="email">
+<label class="login-field-icon fui-mail" for="login-mail"></label></div>
+	<div class="control-group">
+				<input type="text" class="login-field" value="" placeholder="username" name="username">
+<label class="login-field-icon fui-user" for="login-name"></label></div>
+    <div class="control-group">
+	<input type="text" class="login-field" value="" placeholder="chat id" name="chatid">
+<label class="login-field-icon fui-mail" for="login-mail"></label></div>
+<div class="control-group">
+	<div class="field-wrapper">
+				<input type="password" class="login-field" value="" placeholder="password" name="password" onkeyup="checkPass();">
+		<label class="login-field-icon fui-lock" for="password"></label></div></div>
+	<div class="control-group">
+		<div class="field-wrapper">
+				<input type="password" class="login-field" value="" placeholder="password confirm" name="passwordse" onkeyup="checkPass();">
+<label class="login-field-icon fui-lock" for="login-pass"></label>
+	<span id="confirm-message3" class="confirm-message"></span></div></div>
+<input type="submit" value="Register" class="btn btn-primary btn-large btn-block">
+
+</div>
+</div>
+</div>
+</form>

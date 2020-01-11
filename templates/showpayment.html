@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+   <style>
+  a:link, a:visited {
+  background-color: #333;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: #333;
+}
+</style>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+   <body>
+<nav>
+    <ul>
+        <li> <a href = "/admin"><img src="{{url_for('static', filename='start.png')}}" width="16" height="16"> Start</a></li>
+        <li> <a href = "/userlist"><img src="{{url_for('static', filename='listuser.png')}}" width="16" height="16"> List User</a></li>
+        <li><a href="/createuser"><img src="{{url_for('static', filename='adduser.png')}}" width="16" height="16"> Create User</a></li>
+        <li><a href="/setmusiccat"><img src="{{url_for('static', filename='music.png')}}" width="16" height="16"> Set Music Genre</a></li>
+        <li><a href="/setseriescat"><img src="{{url_for('static', filename='stream.png')}}" width="16" height="16"> Set Series Genre</a></li>
+        <li><a href="/delfile"><img src="{{url_for('static', filename='del.png')}}" width="16" height="16"> Delete File</a></li>
+        <li><a href="/delstream"><img src="{{url_for('static', filename='del.png')}}" width="16" height="16"> Delete Stream</a></li>
+        <li><a href="/logout"><img src="{{url_for('static', filename='logout.png')}}" width="16" height="16"> Logout</a></li>
+
+    </ul>
+</nav>
+</div>
+	<div class="container" style="min-height:100% width:80%">
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	    {% for message in messages %}
+		  <div class="alert alert-warning alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+			{{message}}
+		  </div>
+		{% endfor %}
+	  {% endif %}
+	{% endwith %}
+
+	{% block body %}{% endblock %}
+</div>
+      <div class="table-responsive">
+      <table id="list">
+         <thead>
+            <td>ID</td>
+            <td >CHAT ID</td>
+            <td >PSC CODE</td>
+            <td> DATE </td>
+         </thead>
+         
+         {% for row in rows %}
+            <tr>
+                <td >{{row["ID"]}}</td>
+               <td >{{row["chatid"]}}</td>
+               <td > {{ row["psccode"]}}</td>
+                <td > {{ row["date"]}}</td>S
+
+            </tr>
+         {% endfor %}
+      </table>
+      </div>
+      
+
+   </body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+   <style>
+  a:link, a:visited {
+  background-color: #333;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: #333;
+}
+</style>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+   <body>
+<nav>
+    <ul>
+        <li> <a href = "/admin"><img src="{{url_for('static', filename='start.png')}}" width="16" height="16"> Start</a></li>
+        <li> <a href = "/userlist"><img src="{{url_for('static', filename='listuser.png')}}" width="16" height="16"> List User</a></li>
+        <li><a href="/createuser"><img src="{{url_for('static', filename='adduser.png')}}" width="16" height="16"> Create User</a></li>
+        <li><a href="/setmusiccat"><img src="{{url_for('static', filename='music.png')}}" width="16" height="16"> Set Music Genre</a></li>
+        <li><a href="/setseriescat"><img src="{{url_for('static', filename='stream.png')}}" width="16" height="16"> Set Series Genre</a></li>
+        <li><a href="/delfile"><img src="{{url_for('static', filename='del.png')}}" width="16" height="16"> Delete File</a></li>
+        <li><a href="/delstream"><img src="{{url_for('static', filename='del.png')}}" width="16" height="16"> Delete Stream</a></li>
+        <li><a href="/logout"><img src="{{url_for('static', filename='logout.png')}}" width="16" height="16"> Logout</a></li>
+
+    </ul>
+</nav>
+</div>
+	<div class="container" style="min-height:100% width:80%">
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	    {% for message in messages %}
+		  <div class="alert alert-warning alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+			{{message}}
+		  </div>
+		{% endfor %}
+	  {% endif %}
+	{% endwith %}
+
+	{% block body %}{% endblock %}
+</div>
+      <div class="table-responsive">
+      <table id="list">
+         <thead>
+            <td>ID</td>
+            <td >USERNAME</td>
+            <td >PASSWORD</td>
+            <td> E-MAIL</td>
+            <td>ACTIVE</td>
+            <td>CHAT ID</td>
+            <td> PREMIUM</td>
+            <td> CHANGE PASSWORD</td>
+            <td >DELETE</td>
+            <td >BAN</td>
+            <td>UNBAN</td>
+            <td>MAKE PREMIUM</td>
+            <td> UNMAKE PREMIUM</td>
+         </thead>
+         
+         {% for row in rows %}
+            <tr>
+                <td >{{row["ID"]}}</td>
+               <td >{{row["USERNAME"]}}</td>
+               <td > {{ row["PASSWORD"]}}</td>
+                <td > {{ row["EMAIL"]}}</td>
+                <td > {{ row["ACTIVE"]}}</td>
+                <td > {{ row["userid"]}}</td>
+                <td > {{ row["premium"]}}</td>
+               <td ><a href="https://telegram.me/teletransferxbot?start=file-{{row["ID"]}}"> CHANGE PASSWORD </a></td>
+                <td ><a href="/deluser<{{row["ID"]}}>"> DELETE USER </a></td>
+                <td ><a href="/banuser<{{row["ID"]}}>"> BAN USER </a></td>
+                <td ><a href="/unbanuser<{{row["ID"]}}>"> UNBAN USER </a></td>
+                <td><a href="/mkpremium<{{row["ID"]}}>"> MAKE PREMIUM</a></td>
+                <td><a href="/umkpremium<{{row["ID"]}}>"> UNMAKE PREMIUM</a></td>
+
+            </tr>
+         {% endfor %}
+      </table>
+      </div>
+      
+
+   </body>
+</html>
